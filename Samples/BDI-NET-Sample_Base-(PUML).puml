@@ -1,0 +1,11 @@
+@startuml
+!include <office/Servers/application_server>
+!include <office/Devices/router>
+
+nwdiag {
+  internet [shape = cloud];
+  internet -- router;
+  router [description="<$router>\nRouter"];
+  
+}
+@enduml

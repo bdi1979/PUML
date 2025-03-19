@@ -1,0 +1,10 @@
+@startuml
+!include <C4/C4_Context>
+System(router, "Router")
+System(switch, "Switch")
+System(server1, "Server 1")
+System(server2, "Server 2")
+Rel(router, switch, "Eth0")
+Rel(switch, server1, "Port 1")
+Rel(switch, server2, "Port 2")
+@enduml

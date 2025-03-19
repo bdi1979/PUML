@@ -1,0 +1,41 @@
+ @startuml
+
+    nwdiag {
+
+      network inet {
+          address = "10.10.1.x/24"
+          internet [shape = cloud]
+          router [address = "10.10.1.24"]
+      }
+
+      network net1 {
+          address = "192.168.1.x/24"
+
+          router [address = "192.168.1.254"]
+          pc1 [address = "192.168.1.26"]
+          pc2 [address = "192.168.1.202"]
+          pc3 [address = "192.168.1.78"]
+          pc4 [address = "192.168.1.47"]
+          pc5 [address = "192.168.1.93"]
+          pc6 [address = "192.168.1.40"]
+          pc7 [address = "192.168.1.11"]
+          pc8 [address = "192.168.1.34"]
+          pc9 [address = "192.168.1.42"]
+          pc10 [address = "192.168.1.21"]
+
+      }
+
+      network net2 {
+          address = "192.168.2.x/24"
+
+          pc1 [address = "192.168.2.1"]
+          pc10 [address = "192.168.2.99"]
+      }
+      network net3 {
+          address = "192.168.0.x/24"
+
+          pc2 [address = "192.168.0.254"];
+          pc11 [address = "192.168.0.100"]
+      }
+    }
+    @enduml

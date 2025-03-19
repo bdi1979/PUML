@@ -1,0 +1,31 @@
+@startuml
+!include <office/servers/database_server>
+!include <office/servers/application_server>
+!include <office/Devices/router>
+!include <office/Devices/switch>
+
+header Составитель Брацун Д.И.
+
+footer Екатеринбург 2025 г.
+
+Title Схема домашней сети: BDI1979
+
+nwdiag {
+  internet [shape = cloud];
+  internet -- router;
+  router -- switch;
+  router [description="<$router>\nRouter"];
+  switch [description="<$switch>\nSwitch"];
+}
+
+legend right
+# Numbered list
+# Second item
+## Sub item
+## Another sub item
+# Third item
+endlegend
+
+caption Схема составлена для домашнего использования в личных целях
+
+@enduml

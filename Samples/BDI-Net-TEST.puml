@@ -1,0 +1,12 @@
+@startuml
+node Router
+node Switch1
+node PC1
+node PC2
+node Server
+
+Router -- Switch1 : 1 √бит/с
+Switch1 -- PC1 : 1 √бит/с
+Switch1 -- PC2 : 1 √бит/с
+Switch1 -- Server : 1 √бит/с
+@enduml

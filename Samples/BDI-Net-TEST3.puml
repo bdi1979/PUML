@@ -1,0 +1,46 @@
+@startuml
+left to right direction
+
+node Router
+node Switch1
+node Switch2
+node PC1
+node PC2
+node PC3
+node PC4
+node PC5
+node PC6
+node PC7
+node PC8
+node PC9
+node PC10
+node PC11
+node PC12
+node PC13
+node PC14
+node PC15
+node PC16
+node Server
+
+Router -- Switch1 : 1 √бит/с
+Router -- Switch2 : 1 √бит/с
+
+Switch1 -- PC1 : 1 √бит/с
+Switch1 -- PC2 : 1 √бит/с
+Switch1 -- PC3 : 1 √бит/с
+Switch1 -- PC4 : 1 √бит/с
+Switch1 -- PC5 : 1 √бит/с
+Switch1 -- PC6 : 1 √бит/с
+Switch1 -- PC7 : 1 √бит/с
+Switch1 -- PC8 : 1 √бит/с
+
+Switch2 -- PC9 : 1 √бит/с
+Switch2 -- PC10 : 1 √бит/с
+Switch2 -- PC11 : 1 √бит/с
+Switch2 -- PC12 : 1 √бит/с
+Switch2 -- PC13 : 1 √бит/с
+Switch2 -- PC14 : 1 √бит/с
+Switch2 -- PC15 : 1 √бит/с
+Switch2 -- PC16 : 1 √бит/с
+Switch2 -- Server : 1 √бит/с
+@enduml

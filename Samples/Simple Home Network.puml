@@ -1,0 +1,29 @@
+@startuml
+
+nwdiag {
+  // Внешняя сеть (интернет)
+  internet [shape = cloud];
+
+  // WAN: Модем и роутер
+  network WAN {
+    internet;
+    router [address = "WAN Port"];
+  }
+
+  // LAN: Проводные устройства
+  network LAN {
+    router [address = "LAN Ports"];
+    computer [address = "192.168.1.2"];
+    nas [address = "192.168.1.3"];
+  }
+
+  // Wi-Fi: Беспроводные устройства
+  network WiFi {
+    router [address = "SSID: HomeWiFi"];
+    smartphone;
+    tv;
+    printer;
+  }
+
+}
+@enduml

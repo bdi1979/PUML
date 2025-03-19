@@ -1,0 +1,142 @@
+@startuml
+!include <office/Servers/application_server>
+!include <office/Servers/web_server>
+// !include <office/Servers/file_server>
+!include <office/Servers/database_server>
+// !include <office/Servers/dirsync_server>
+// !include <office/Servers/domain_controller>
+// !include <office/Servers/hybrid_server>
+// !include <office/Servers/network>
+// !include <office/Servers/server_generic>
+// !include <office/Servers/sql_server>
+// !include <office/Servers/virtual_application_server>
+// !include <office/Servers/virtual_server>
+// !include <office/Servers/windows_server>
+
+!include <office/Devices/router>
+!include <office/Devices/switch>
+// !include <office/Devices/modem>
+
+!include <office/Devices/cell_phone_generic>
+!include <office/Devices/cell_phone_android_proportional>
+!include <office/Devices/device_tablet_android>
+
+!include <office/Devices/device_printer>
+!include <office/Devices/workstation>
+// !include <office/Devices/workstation_pc>
+!include <office/Devices/device_laptop>
+
+!include <office/Devices/device_phone_voip>
+
+!include <office/Devices/device_tv>
+// !include <office/Devices/video_camera>
+
+header Автор: Фамилия И.О.
+
+footer Екатеринбург 2025 г.
+
+title Схема домашней сети
+
+nwdiag {
+  // Интернет и основное оборудование
+  Internet [shape = cloud];
+
+  Internet -- router;
+  
+
+  router [address = "ISP (DHCP)\nWAN: 87.120.0.1\nLAN: 192.168.0.1/24", shape = router [type=managed], description = "<$router>\n BDI-RTR-01"]];
+  switch [address = "192.168.0.2", shape = switch [type=managed], description = "<$switch>\n BDI-SW-01"];
+
+nwdiag {
+  network DMZ {
+      description = "DMZ (BDI)"
+      color = "yellow"
+
+      address = "172.16.0.1/24"
+
+      router [address = "172.16.0.1", shape = router [type=managed]];
+
+      web01 [address = "172.16.0.2, 172.16.0.20",  description = "<$web_server>\n WEB-01"]
+      web02 [address = "172.16.0.21",  description = "<$application_server>\n WEB-02"];
+  }
+  network LAN {
+      description = "LAN (Домашняя сеть)"
+      width = full
+      color = "green"
+
+      address = "192.168.0.1/24";
+
+      router [address = "192.168.0.1", shape = router [type=managed]];
+      
+
+      pc-pentagon [address = "192.168.0.100",  description = "<$workstation>\n BDI-PC-01"];
+      db02 [address = "192.168.0.101",  description = "<$database_server>\n Сервис-2"];
+  }
+
+  network WIFI-WORK {
+      description = "WIFI (Рабочая)"
+      width = full
+      color = "palegreen"
+
+      address = "192.168.100.1/24";
+
+      router [address = "192.168.100.1", shape = router [type=managed]];
+
+      Mobile-1 [address = "192.168.100.2",  description = "<$cell_phone_android_proportional>\n BDI"];
+      Mobile-2 [address = "192.168.100.3",  description = "<$cell_phone_android_proportional>\n DOY"];
+      Tablet-1 [address = "192.168.100.4",  description = "<$device_tablet_android>\n DOY"];
+
+      Notebook-1 [address = "192.168.100.100",  description = "<$device_laptop>\n BDI-NB-01"];
+      Notebook-2 [address = "192.168.100.101",  description = "<$device_laptop>\n BDI-NB-02"];
+  }
+
+  network PRINT {
+      description = "Сеть (Печать)"
+      width = full
+      color = "orange"
+
+      address = "192.168.101.1/24";
+
+      router [address = "192.168.101.1", shape = router [type=managed]];
+      mfp-kyocera [address = "192.168.101.2",  description = "<$device_printer>\n МФУ Kyocera FS-1035MFP \n BDI-MFP-01"];
+      printer-hp [address = "192.168.101.3",  description = "<$device_printer>\n Принтер HP LaserJet 2050DN \n BDI-PRN-01"];
+  }
+
+  network MM{
+      description = "Сеть (Мультмедиа)"
+      width = full
+      color = "lightgreen"
+
+      address = "192.168.102.1/24";
+
+      router [address = "192.168.102.1", shape = router [type=managed]];
+      tv-1 [address = "192.168.102.2",  description = "<$device_tv>\n ТВ LG \n BDI-TV-01"];
+      tv-2 [address = "192.168.102.3",  description = "<$device_tv>\n ТВ XIAOMI \n BDI-TV-02"];
+  }
+
+     group {
+     color = "SkyBlue";
+     description = "Зал";
+     web01;
+     web02;
+     }
+
+}
+
+  router -- switch;
+
+     legend right
+     Описание элементов схемы:
+     # Numbered list
+     # Second item
+     ## Sub item
+     ## Another sub item
+        * <$cell_phone_android_proportional> - Сотовые телефоны 
+        * <$device_laptop> - Ноутбуки
+     # Third item
+     end legend
+
+     caption Схема создана с помощью: **PlantUML**
+
+}
+@enduml

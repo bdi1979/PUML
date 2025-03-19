@@ -1,0 +1,57 @@
+@startuml
+skinparam defaultTextAlignment center
+skinparam nodesep 10
+skinparam ranksep 15
+
+' Определение устройств Cisco
+rectangle "<&cisco-router> Router" as Router
+
+rectangle "<&cisco-switch> Core Switch" as Switch1
+rectangle "<&cisco-switch> Floor1 Switch" as Switch2
+rectangle "<&cisco-switch> Floor2 Switch" as Switch3
+rectangle "<&cisco-switch> Server Switch" as Switch4
+
+rectangle "<&cisco-workstation> PC1" as PC1
+rectangle "<&cisco-workstation> PC2" as PC2
+rectangle "<&cisco-workstation> PC3" as PC3
+rectangle "<&cisco-workstation> PC4" as PC4
+rectangle "<&cisco-workstation> PC5" as PC5
+rectangle "<&cisco-workstation> PC6" as PC6
+rectangle "<&cisco-workstation> PC7" as PC7
+rectangle "<&cisco-workstation> PC8" as PC8
+rectangle "<&cisco-workstation> PC9" as PC9
+rectangle "<&cisco-workstation> PC10" as PC10
+
+rectangle "<&cisco-server> File Server" as Server1
+rectangle "<&cisco-server> Web Server" as Server2
+rectangle "<&cisco-wireless> WiFi AP" as AP1
+rectangle "<&cisco-phone> IP Phone" as Phone1
+rectangle "<&cisco-printer> Laser Printer" as Printer1
+rectangle "<&cisco-security-camera> CCTV Camera" as Camera1
+
+' Соединения
+Router -[thickness=3]- Switch1 : 10 Gbps
+Switch1 -[thickness=2]- Switch2 : 1 Gbps
+Switch1 -[thickness=2]- Switch3 : 1 Gbps
+Switch1 -[thickness=3]- Switch4 : 10 Gbps
+
+Switch2 --> PC1 : 1 Gbps
+Switch2 --> PC2 : 1 Gbps
+Switch2 --> Phone1 : 1 Gbps
+Switch2 --> Camera1 : 1 Gbps
+
+Switch3 --> PC3 : 1 Gbps
+Switch3 --> PC4 : 1 Gbps
+Switch3 --> PC5 : 1 Gbps
+Switch3 --> AP1 : 1 Gbps
+
+Switch4 --> Server1 : 10 Gbps
+Switch4 --> Server2 : 10 Gbps
+Switch4 --> PC6 : 1 Gbps
+Switch4 --> PC7 : 1 Gbps
+
+Switch1 --> PC8 : 1 Gbps
+Switch1 --> PC9 : 1 Gbps
+Switch1 --> PC10 : 1 Gbps
+Switch1 --> Printer1 : 1 Gbps
+@enduml
