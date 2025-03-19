@@ -1,0 +1,16 @@
+﻿@startuml Type Initialization
+
+start
+:Read default type\n ;
+split
+:HW type detected; <<input>>
+if (Compare types) is (matches) then
+  :Continue;
+else (doesn't match)
+  :Store detected\n type ;
+end if
+split again
+:other type\n detected; <<input>>
+end split
+stop
+@enduml

@@ -1,0 +1,14 @@
+﻿@startuml
+!pragma teoz true
+box "component"
+  box "sub1\n\n"
+    participant a
+    box "subsub1"
+      participant suba
+    end box
+  endbox
+  box "sub2"
+    participant b
+  endbox
+end box
+@enduml

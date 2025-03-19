@@ -1,0 +1,27 @@
+﻿@startuml
+start
+:Search for File;
+if(Is in local cache?) then (yes)
+    :Finish;
+    stop
+else (no)
+    :Check Cached SearchObjectToNodeTb;
+        if(Find in SearchObjectToNodeTb) then (yes)
+            :Send refresh req. SO to SN;
+        else(No)
+            :Send SO query to closest SymbolToNodeCacheTb match;
+            if(Symbol in Table) then (yes)
+                switch(What role am I?)
+                    case(SearchNode)
+                        :Send out Query to SN and get SearchObject;
+                    case(FileNode)
+                        :Return results;
+                endswitch
+            else(No)
+                switch(What role am I?)
+                    case(client)
+                        :Send to Node with closest result;
+                    case(SearchNode)
+                        :Perform alg. for tablesym. creation;
+                endswitch
+@enduml
