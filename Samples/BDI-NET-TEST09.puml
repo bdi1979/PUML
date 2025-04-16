@@ -1,0 +1,66 @@
+@startuml
+!include <office/Concepts/firewall>
+!include <office/Devices/modem>
+!include <office/Devices/router>
+!include <office/Devices/modem>
+!include <office/Devices/workstation>
+!include <office/Devices/workstation_pc>
+!include <office/Servers/application_server>
+!include <office/Servers/database_server>
+!include <office/Servers/virtual_web_server>
+!include <office/Servers/virtual_server>
+!include <office/Servers/file_server>
+!include <office/Servers/physical_host_solid_blue>
+
+nwdiag {
+    ISP_A [ shape = cloud];
+    ISP_A -- routerA;
+    ISP_B [ shape = cloud];
+    ISP_B -- routerB;
+
+    Firewall [description = "<$firewall>\nOPNsense"];
+
+    network RED1 {
+        description ="RED1/WAN1"
+        address = "192.168.1.0/24"
+        color = red
+        routerA [address = "192.168.1.1", description = "<$modem>\nFast Fiber\nDynamic IP"];
+    }
+
+    network RED2 {
+        description ="RED2/WAN2"
+        address = "192.168.2.0/24"
+        color = red
+        routerB [address = "192.168.2.1", description = "<$modem>\nSlow DSL\nFixed IP"];
+        Firewall [address = "192.168.2.254"];
+    }
+
+    network ORANGE {
+        description ="ORANGE/DMZ"
+        address = "192.168.9.0/24
+        color = orange
+        Firewall [address = "192.168.9.254"];
+        WebServer [address = "192.168.9.8", description = "<$virtual_web_server>\nwebserver"];
+        OtherServer [address = "192.168.9.7", description = "<$virtual_server>\nuserver"];
+    }
+
+    network GREEN {
+        description ="GREEN/LAN"
+        address = "192.168.7.0/24
+        color = palegreen
+        Firewall [address = "192.168.7.254"];
+        cinderella [address = "192.168.7.12", description = "<$workstation>\ncinderella"];
+        controller [address = "192.168.7.x", description = "<$workstation_pc>\ncontroller"];
+        workstation [address = "192.168.7.90", description = "<$file_server>\nSynology"];
+    }
+    
+    group {
+        color = "SkyBlue";
+        description = "<$physical_host_solid_blue>\nLXD Server";
+        Firewall;
+        WebServer;
+        OtherServer;
+    }
+
+}
+@enduml

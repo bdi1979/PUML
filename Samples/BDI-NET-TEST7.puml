@@ -1,0 +1,103 @@
+@startuml
+' Общие настройки внешнего вида
+skinparam backgroundColor #EFEFEF
+skinparam nodeStyle rectangle
+skinparam shadowing false
+skinparam defaultTextAlignment center
+
+' Основные сетевые узлы
+node "ISP" as isp
+node "Модем" as modem
+node "Маршрутизатор" as router
+node "Core Switch" as core
+
+isp -down-> modem : Интернет
+modem -down-> router : WAN
+router -down-> core : Ethernet
+
+' VLAN 10: Офис/Рабочие устройства (7 устройств)
+package "VLAN 10\n(Офис/Рабочие)" {
+  node "ПК1" as pc1
+  node "ПК2" as pc2
+  node "ПК3" as pc3
+  node "Ноутбук1" as laptop1
+  node "Ноутбук2" as laptop2
+  node "Принтер" as printer
+  node "NAS" as nas
+}
+
+' VLAN 20: Умный дом (8 устройств)
+package "VLAN 20\n(Умный дом)" {
+  node "Смартфон1" as phone1
+  node "Смартфон2" as phone2
+  node "Планшет" as tablet
+  node "Smart TV" as smarttv
+  node "Консоль" as console
+  node "Умная колонка" as smartSpeaker
+  node "Умные лампы" as smartLamps
+  node "Смарт-часы" as smartWatch
+}
+
+' VLAN 30: IoT устройства (7 устройств)
+package "VLAN 30\n(IoT устройства)" {
+  node "Камера 1" as cam1
+  node "Камера 2" as cam2
+  node "Камера 3" as cam3
+  node "Умный термостат" as thermostat
+  node "Датчик движения" as motionSensor
+  node "Датчик двери" as doorSensor
+  node "Умный замок" as smartLock
+}
+
+' VLAN 40: Развлекательные устройства (8 устройств)
+package "VLAN 40\n(Развлекательные)" {
+  node "Игровая консоль" as gameConsole
+  node "Smart TV 2" as smarttv2
+  node "Ресивер" as receiver
+  node "Домашний кинотеатр" as homeTheater
+  node "Музыкальный центр" as musicCenter
+  node "Портативная колонка" as portableSpeaker
+  node "MP3 плеер" as mp3Player
+  node "Blu-ray плеер" as blurayPlayer
+}
+
+' Подключение VLAN к Core Switch
+' VLAN 10
+core --> pc1
+core --> pc2
+core --> pc3
+core --> laptop1
+core --> laptop2
+core --> printer
+core --> nas
+
+' VLAN 20
+core --> phone1
+core --> phone2
+core --> tablet
+core --> smarttv
+core --> console
+core --> smartSpeaker
+core --> smartLamps
+core --> smartWatch
+
+' VLAN 30
+core --> cam1
+core --> cam2
+core --> cam3
+core --> thermostat
+core --> motionSensor
+core --> doorSensor
+core --> smartLock
+
+' VLAN 40
+core --> gameConsole
+core --> smarttv2
+core --> receiver
+core --> homeTheater
+core --> musicCenter
+core --> portableSpeaker
+core --> mp3Player
+core --> blurayPlayer
+
+@enduml
