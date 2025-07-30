@@ -1,0 +1,53 @@
+@startuml
+nwdiag {
+  internet1 [shape=cloud];
+  internet2 [shape=cloud];
+  internet1 -- FITELnet_1;
+  internet2 -- FITELnet_2;
+  FITELnet_1 [address = "203.0.113.6/29"];
+  FITELnet_2 [address = "203.0.113.14/29"];
+
+  wan1 [shape=cloud];
+  wan2 [shape=cloud];
+  wan1 -- Meraki_1
+  wan2 -- Meraki_2
+  Meraki_1 [address = "192.168.1.1/24"];
+  Meraki_2 [address = "192.168.2.1/24"];
+
+  network vpn {
+      address = "172.16.3.0/24";
+
+      Meraki_1 [address = "172.16.3.2 (.1)"];
+      Meraki_2 [address = "172.16.3.3 (.1)"];
+      C9300_1 [address = "172.16.3.252 (.254)"];
+      C9300_2 [address = "172.16.3.252 (.254)"];
+  }
+  network core {
+      address = "172.16.4.0/24";
+
+      FITELnet_1 [address = "172.16.4.2 (.1)"];
+      FITELnet_2 [address = "172.16.4.3 (.1)"];
+      C9300_1 [address = "172.16.4.252 (.254)"];
+      C9300_2 [address = "172.16.4.253 (.254)"];
+  }
+
+  network lb {
+      address = "172.16.0.0/24";
+
+      FITELnet_1 [address = "172.16.0.2 (.1)"];
+      FITELnet_2 [address = "172.16.0.3 (.1)"];
+      A10_1 [address = "172.16.0.252 (.254)"];
+      A10_2 [address = "172.16.0.253 (.254)"];
+  }
+  network server {
+      address = "172.16.1.0/24";
+
+      A10_1 [address = "172.16.1.2 (.1)"];
+      A10_2 [address = "172.16.1.3 (.1)"];
+      Server_1 [address = "172.16.1.128"];
+      Server_2 [address = "172.16.1.129"];
+  }
+
+
+}
+@enduml
